@@ -1,0 +1,35 @@
+{
+  "name": "aghaaz",
+  "version": "0.1.0",
+  "description": "A CLI for scaffolding production-ready web applications based in reactjs, nextjs and nestjs",
+  "type": "module",
+  "bin": {
+    "aghaaz": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run typecheck && npm run build"
+  },
+  "keywords": [
+    "cli",
+    "scaffolding",
+    "react",
+    "nextjs",
+    "nestjs"
+  ],
+  "author": "Zaryab Farooqui",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^15.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "tsdown": "^0.22.14",
+    "typescript": "^7.0.2"
+  }
+}
