@@ -10,7 +10,7 @@ Linking and unlinking packages locally
     - npm unlink -g aghaaz
 
 Building project after changes
-    - npm build
+    - npm run build
 
 Running and testing project locally
     - aghaaz hello
