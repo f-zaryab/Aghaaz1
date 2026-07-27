@@ -1,6 +1,7 @@
 import { select } from "@inquirer/prompts";
+import { ProjectType } from "../types/project-config.types.js";
 
-export const askProjectType = async () => {
+export const askProjectType = async (): Promise<ProjectType> => {
   return select({
     message: "Project type?",
     choices: [
