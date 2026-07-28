@@ -1,12 +1,18 @@
 import {
 	askBackendChoices,
 	askFrontendChoices,
+	askFrontendComponentLib,
+	askFrontendHttpClient,
+	askFrontendStyling,
 	askPackageManager,
 	askProjectName,
 	askProjectType,
 } from "../prompts/index.js";
 import type {
 	BackendType,
+	FrontendComponentLibrary,
+	FrontendHttpClient,
+	FrontendStyling,
 	FrontendType,
 	ProjectConfig,
 } from "../types/project-config.types.js";
@@ -19,9 +25,20 @@ export const collectProjectConfig = async (): Promise<ProjectConfig> => {
 	let frontendType: FrontendType | null = null;
 	let backendType: BackendType | null = null;
 
+	// frontend specific questions
+	let frontendHttpClient: FrontendHttpClient | null = null;
+	let frontendStyleChoice: FrontendStyling | null = null;
+	let frontendComponentLibrary: FrontendComponentLibrary | null = null;
+
 	switch (projectType) {
 		case "frontend-only":
 			frontendType = await askFrontendChoices();
+			frontendHttpClient = await askFrontendHttpClient();
+			frontendComponentLibrary = await askFrontendComponentLib();
+
+			if (frontendType === "react") {
+				frontendStyleChoice = await askFrontendStyling();
+			}
 			break;
 
 		case "backend-only":
@@ -40,6 +57,9 @@ export const collectProjectConfig = async (): Promise<ProjectConfig> => {
 		projectType,
 		frontendType,
 		backendType,
+		frontendHttpClient,
+		frontendStyleChoice,
+		frontendComponentLibrary,
 	};
 
 	return projectConfig;

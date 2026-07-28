@@ -6,6 +6,12 @@ export type FrontendType = "react" | "nextjs";
 
 export type BackendType = "nestjs" | "expressjs";
 
+export type FrontendStyling = "tailwind-css" | "none";
+
+export type FrontendComponentLibrary = "mantine" | "material-ui" | "none";
+
+export type FrontendHttpClient = "axios" | "ky" | "native-fetch";
+
 export interface ProjectConfig {
 	projectName: string;
 	packageManager: PackageManager;
