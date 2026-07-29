@@ -33,12 +33,9 @@ export const collectProjectConfig = async (): Promise<ProjectConfig> => {
 	switch (projectType) {
 		case "frontend-only":
 			frontendType = await askFrontendChoices();
-			frontendHttpClient = await askFrontendHttpClient();
+			frontendStyleChoice = await askFrontendStyling();
 			frontendComponentLibrary = await askFrontendComponentLib();
-
-			if (frontendType === "react") {
-				frontendStyleChoice = await askFrontendStyling();
-			}
+			frontendHttpClient = await askFrontendHttpClient();
 			break;
 
 		case "backend-only":

@@ -41,6 +41,9 @@ Running and testing project locally
   - material-ui
   - mantine-core
   - none
+- styling
+  - tailwindcss
+  - none
 - http-client
   - axios
   - ky
@@ -60,8 +63,13 @@ Running and testing project locally
   - none
 - styling
   - tailwindcss
-  - css-modules
+  - none
 - http-client
   - axios
   - ky
   - native fetch
+- custom creations
+  - folder creation
+    - features
+      - folders dictated by users in features
+    - lib

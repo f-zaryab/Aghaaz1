@@ -1,8 +1,11 @@
-import { access } from "node:fs/promises";
 import path from "node:path";
 import { execa } from "execa";
 import type { ProjectConfig } from "../../../types/project-config.types.js";
-import { getCreateNextAppCommand } from "../package-runner.js";
+import { getCreateNextAppCommand } from "../../shared/package-runner.js";
+import {
+	ensureDirectoryDoesNotExist,
+	getPackageManagerFlag,
+} from "../../shared/utils/index.js";
 
 export const createNextApp = async (config: ProjectConfig): Promise<void> => {
 	// a non-nextjs config was passed
@@ -18,6 +21,7 @@ export const createNextApp = async (config: ProjectConfig): Promise<void> => {
 
 	const packageCommand = getCreateNextAppCommand(config.packageManager);
 
+	// Using official nextjs installer with required flags
 	const createNextjsApp = [
 		...packageCommand.args,
 		config.projectName,
@@ -35,6 +39,11 @@ export const createNextApp = async (config: ProjectConfig): Promise<void> => {
 		// Aghaaz will configure linting separately
 		"--no-linter",
 
+		// Styling selection
+		config.frontendStyleChoice === "tailwind-css"
+			? "--tailwind"
+			: "--no-tailwind",
+
 		// Ensure create-next-app uses the selected package manager
 		getPackageManagerFlag(config.packageManager),
 	];
@@ -45,37 +54,4 @@ export const createNextApp = async (config: ProjectConfig): Promise<void> => {
 		cwd: process.cwd(),
 		stdio: "inherit",
 	});
-};
-
-const ensureDirectoryDoesNotExist = async (
-	targetDirectory: string,
-): Promise<void> => {
-	try {
-		await access(targetDirectory);
-
-		throw new Error(`Directory already exists: ${targetDirectory}`);
-	} catch (error) {
-		if (error instanceof Error && "code" in error && error.code === "ENOENT") {
-			return;
-		}
-
-		throw error;
-	}
-};
-
-const getPackageManagerFlag = (
-	packageManager: ProjectConfig["packageManager"],
-): string => {
-	switch (packageManager) {
-		case "npm":
-			return "--use-npm";
-
-		case "pnpm":
-			return "--use-pnpm";
-
-		default: {
-			const exhaustiveCheck: never = packageManager;
-			throw new Error(`Unsupported package manager: ${exhaustiveCheck}`);
-		}
-	}
 };

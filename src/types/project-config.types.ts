@@ -13,9 +13,11 @@ export type FrontendComponentLibrary = "mantine" | "material-ui" | "none";
 export type FrontendHttpClient = "axios" | "ky" | "native-fetch";
 
 export interface ProjectConfig {
-	projectName: string;
-	packageManager: PackageManager;
-	projectType: ProjectType;
-	frontendType: FrontendType | null;
-	backendType: BackendType | null;
+  projectName: string;
+  packageManager: PackageManager;
+  projectType: ProjectType;
+  frontendType: FrontendType | null;
+  backendType: BackendType | null;
+  frontendStyleChoice: FrontendStyling | null;
+  frontendPages: string[];
 }
