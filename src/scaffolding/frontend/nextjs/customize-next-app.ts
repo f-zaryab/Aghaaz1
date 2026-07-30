@@ -1,11 +1,19 @@
 import type { ProjectConfig } from "../../../types/project-config.types.js";
+import { generatePages, generateProjectStructure } from "./generators/index.js";
 
 type CustomizeNextAppOptions = {
 	config: ProjectConfig;
-	targetDirectory: string;
+	targetDir: string;
 };
 
 export const customizeNextApp = async ({
 	config,
-	targetDirectory,
-}: CustomizeNextAppOptions) => {};
+	targetDir,
+}: CustomizeNextAppOptions): Promise<void> => {
+	await generateProjectStructure(targetDir);
+
+	await generatePages({
+		targetDir,
+		pages: config.frontendPages,
+	});
+};

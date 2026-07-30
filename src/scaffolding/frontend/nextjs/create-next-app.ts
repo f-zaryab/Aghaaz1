@@ -6,6 +6,7 @@ import {
 	ensureDirectoryDoesNotExist,
 	getPackageManagerFlag,
 } from "../../shared/utils/index.js";
+import { customizeNextApp } from "./customize-next-app.js";
 
 export const createNextApp = async (config: ProjectConfig): Promise<void> => {
 	// a non-nextjs config was passed
@@ -50,8 +51,17 @@ export const createNextApp = async (config: ProjectConfig): Promise<void> => {
 
 	console.log(`\nCreating Next.js application: ${config.projectName}\n`);
 
+	// Create project (nextjs app)
 	await execa(packageCommand.command, createNextjsApp, {
 		cwd: process.cwd(),
 		stdio: "inherit",
 	});
+
+	// Customize project(nextjs app)
+	await customizeNextApp({
+		config,
+		targetDir,
+	});
+
+	console.log(`\nNext.js application created successfully.\n`);
 };

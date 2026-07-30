@@ -3,6 +3,7 @@ import {
 	askFrontendChoices,
 	askFrontendComponentLib,
 	askFrontendHttpClient,
+	askFrontendPages,
 	askFrontendStyling,
 	askPackageManager,
 	askProjectName,
@@ -24,6 +25,7 @@ export const collectProjectConfig = async (): Promise<ProjectConfig> => {
 
 	let frontendType: FrontendType | null = null;
 	let backendType: BackendType | null = null;
+	let frontendPages: string[] = [];
 
 	// frontend specific questions
 	let frontendHttpClient: FrontendHttpClient | null = null;
@@ -33,9 +35,15 @@ export const collectProjectConfig = async (): Promise<ProjectConfig> => {
 	switch (projectType) {
 		case "frontend-only":
 			frontendType = await askFrontendChoices();
+
 			frontendStyleChoice = await askFrontendStyling();
 			frontendComponentLibrary = await askFrontendComponentLib();
 			frontendHttpClient = await askFrontendHttpClient();
+
+			if (frontendType === "nextjs") {
+				frontendPages = await askFrontendPages();
+			}
+
 			break;
 
 		case "backend-only":
@@ -45,6 +53,15 @@ export const collectProjectConfig = async (): Promise<ProjectConfig> => {
 		case "full-stack":
 			frontendType = await askFrontendChoices();
 			backendType = await askBackendChoices();
+
+			frontendStyleChoice = await askFrontendStyling();
+			frontendComponentLibrary = await askFrontendComponentLib();
+			frontendHttpClient = await askFrontendHttpClient();
+
+			if (frontendType === "nextjs") {
+				frontendPages = await askFrontendPages();
+			}
+
 			break;
 	}
 
@@ -57,6 +74,7 @@ export const collectProjectConfig = async (): Promise<ProjectConfig> => {
 		frontendHttpClient,
 		frontendStyleChoice,
 		frontendComponentLibrary,
+		frontendPages,
 	};
 
 	return projectConfig;
