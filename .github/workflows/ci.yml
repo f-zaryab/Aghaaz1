@@ -31,3 +31,6 @@ jobs:
 
       - name: Run test placeholder
         run: echo "Running tests ------>>>"
+
+      - name: Build project
+        run: npm run build
