@@ -1,3 +1,5 @@
+const FEATURE_NAME_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
 const validatePageRoute = (route: string): true | string => {
 	const normalizedRoute = route.trim().replace(/^\/+|\/+$/g, "");
 
@@ -73,4 +75,34 @@ export const parsePageRoutes = (value: string): string[] => {
 		.filter((route): route is string => Boolean(route));
 
 	return [...new Set(routes)];
+};
+
+// ---------------------------------------------------------------//
+export const parseFeatureNames = (value: string): string[] => {
+	return [
+		...new Set(
+			value
+				.split(",")
+				.map((feature) => feature.trim().toLowerCase())
+				.filter(Boolean),
+		),
+	];
+};
+
+export const validateFeatureInput = (value: string): true | string => {
+	const features = parseFeatureNames(value);
+
+	if (features.length === 0) {
+		return "Enter at least one feature.";
+	}
+
+	const invalidFeature = features.find(
+		(feature) => !FEATURE_NAME_PATTERN.test(feature),
+	);
+
+	if (invalidFeature) {
+		return `"${invalidFeature}" is invalid. Use lowercase letters, numbers, and hyphens only.`;
+	}
+
+	return true;
 };

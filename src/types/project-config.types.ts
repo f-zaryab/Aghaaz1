@@ -16,8 +16,14 @@ export interface ProjectConfig {
 	projectName: string;
 	packageManager: PackageManager;
 	projectType: ProjectType;
+
 	frontendType: FrontendType | null;
 	backendType: BackendType | null;
+
 	frontendStyleChoice: FrontendStyling | null;
+	frontendComponentLibrary: FrontendComponentLibrary | null;
+	frontendHttpClient: FrontendHttpClient | null;
+
 	frontendPages: string[];
+	frontendFeatures: string[];
 }

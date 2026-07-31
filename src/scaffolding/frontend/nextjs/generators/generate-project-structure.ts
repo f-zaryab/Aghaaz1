@@ -11,6 +11,11 @@ const PROJECT_DIRECTORIES = [
 ] as const;
 
 const generateProjectStructure = async (targetDir: string): Promise<void> => {
+	/*
+	directory = "src/features";
+	directoryPath = path.join("C:\\Projects\\myApp", "src/features");
+	RESULT> directoryPath = C:\Projects\myApp\src\features
+	*/
 	for (const directory of PROJECT_DIRECTORIES) {
 		const directoryPath = path.join(targetDir, directory);
 

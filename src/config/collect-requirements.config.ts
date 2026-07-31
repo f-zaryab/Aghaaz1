@@ -2,6 +2,7 @@ import {
 	askBackendChoices,
 	askFrontendChoices,
 	askFrontendComponentLib,
+	askFrontendFeatures,
 	askFrontendHttpClient,
 	askFrontendPages,
 	askFrontendStyling,
@@ -26,6 +27,7 @@ export const collectProjectConfig = async (): Promise<ProjectConfig> => {
 	let frontendType: FrontendType | null = null;
 	let backendType: BackendType | null = null;
 	let frontendPages: string[] = [];
+	let frontendFeatures: string[] = [];
 
 	// frontend specific questions
 	let frontendHttpClient: FrontendHttpClient | null = null;
@@ -42,6 +44,7 @@ export const collectProjectConfig = async (): Promise<ProjectConfig> => {
 
 			if (frontendType === "nextjs") {
 				frontendPages = await askFrontendPages();
+				frontendFeatures = await askFrontendFeatures();
 			}
 
 			break;
@@ -60,12 +63,13 @@ export const collectProjectConfig = async (): Promise<ProjectConfig> => {
 
 			if (frontendType === "nextjs") {
 				frontendPages = await askFrontendPages();
+				frontendFeatures = await askFrontendFeatures();
 			}
 
 			break;
 	}
 
-	const projectConfig = {
+	const projectConfig: ProjectConfig = {
 		projectName,
 		packageManager,
 		projectType,
@@ -75,6 +79,7 @@ export const collectProjectConfig = async (): Promise<ProjectConfig> => {
 		frontendStyleChoice,
 		frontendComponentLibrary,
 		frontendPages,
+		frontendFeatures,
 	};
 
 	return projectConfig;

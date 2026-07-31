@@ -1,6 +1,7 @@
 import { askBackendChoices } from "./backend.js";
 import { askFrontendChoices } from "./frontend.js";
 import { askFrontendComponentLib } from "./frontendComponentLib.js";
+import { askFrontendFeatures } from "./frontendFeatures.js";
 import { askFrontendHttpClient } from "./frontendHttpClient.js";
 import { askFrontendPages } from "./frontendPages.js";
 import { askFrontendStyling } from "./frontendStyling.js";
@@ -12,6 +13,7 @@ export {
 	askBackendChoices,
 	askFrontendChoices,
 	askFrontendComponentLib,
+	askFrontendFeatures,
 	askFrontendHttpClient,
 	askFrontendPages,
 	askFrontendStyling,

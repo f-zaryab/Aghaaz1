@@ -57,20 +57,24 @@ export const createPageComponentName = (route: string): string => {
 };
 
 // FOR STATIC PAGE GENERATION -------------------------------
-export const assertPathInsideAppDirectory = ({
-	appDir,
+export const assertPathInsideDirectory = ({
+	parentDir,
 	targetPath,
 }: {
-	appDir: string;
+	parentDir: string;
 	targetPath: string;
 }): void => {
-	const relativePath = path.relative(appDir, targetPath);
+	const relativePath = path.relative(parentDir, targetPath);
 
-	const isOutsideAppDirectory =
-		relativePath.startsWith("..") || path.isAbsolute(relativePath);
+	const isOutsideDirectory =
+		relativePath === ".." ||
+		relativePath.startsWith(`..${path.sep}`) ||
+		path.isAbsolute(relativePath);
 
-	if (isOutsideAppDirectory) {
-		throw new Error(`Unsafe page path: "${targetPath}".`);
+	if (isOutsideDirectory) {
+		throw new Error(
+			`Generated path is outside the expected directory: ${targetPath}`,
+		);
 	}
 };
 

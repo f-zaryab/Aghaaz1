@@ -1,7 +1,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import {
-	assertPathInsideAppDirectory,
+	assertPathInsideDirectory,
 	pathExists,
 } from "../../../shared/utils/index.js";
 import { createPageTemplate } from "./page-template.js";
@@ -22,8 +22,8 @@ const generateSinglePage = async ({
 }: GenerateSinglePageOptions): Promise<void> => {
 	const pageDir = path.resolve(appDir, route);
 
-	assertPathInsideAppDirectory({
-		appDir,
+	assertPathInsideDirectory({
+		parentDir: appDir,
 		targetPath: pageDir,
 	});
 

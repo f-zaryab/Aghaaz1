@@ -16,6 +16,7 @@ export const createNextApp = async (config: ProjectConfig): Promise<void> => {
 		);
 	}
 
+	// E.g. path.resolve("C:\\Projects", "myApp") => C:\Projects\myApp
 	const targetDir = path.resolve(process.cwd(), config.projectName);
 
 	await ensureDirectoryDoesNotExist(targetDir);
