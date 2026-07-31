@@ -1,5 +1,6 @@
 import type { ProjectConfig } from "../types/project-config.types.js";
 import { createNextApp } from "./frontend/nextjs/create-next-app.js";
+import { createReactApp } from "./frontend/reactjs/create-react-app.js";
 
 export const createProject = async (config: ProjectConfig): Promise<void> => {
 	switch (config.projectType) {
@@ -8,7 +9,7 @@ export const createProject = async (config: ProjectConfig): Promise<void> => {
 				await createNextApp(config);
 				return;
 			} else if (config.frontendType === "react") {
-				// await createReactjsApp(config)
+				await createReactApp(config);
 				return;
 			}
 

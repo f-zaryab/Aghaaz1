@@ -57,6 +57,7 @@ Running and testing project locally
 ### Reactjs
 
 - pages
+- oxlint lib
 - component-library
   - material-ui
   - mantine-core
