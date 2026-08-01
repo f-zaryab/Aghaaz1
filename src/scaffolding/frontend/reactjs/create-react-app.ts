@@ -2,8 +2,8 @@ import path from "node:path";
 import chalk from "chalk";
 import { execa } from "execa";
 import type { ProjectConfig } from "../../../types/project-config.types.js";
-import { getCreateReactAppCommand } from "../../shared/package-runner.js";
 import { ensureDirectoryDoesNotExist } from "../../shared/utils/index.js";
+import { getCreateReactAppCommand } from "../shared/generators/package-installations/package-runner/package-runner.js";
 
 export const createReactApp = async (config: ProjectConfig): Promise<void> => {
 	// a non-reactjs config was passed

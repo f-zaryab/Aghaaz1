@@ -1,4 +1,4 @@
-import type { PackageManager } from "../../types/project-config.types.js";
+import type { PackageManager } from "../../../../../../types/project-config.types.js";
 
 export type PackageCommand = {
 	command: string;

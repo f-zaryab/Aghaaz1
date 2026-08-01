@@ -1,11 +1,11 @@
 import path from "node:path";
 import { execa } from "execa";
 import type { ProjectConfig } from "../../../types/project-config.types.js";
-import { getCreateNextAppCommand } from "../../shared/package-runner.js";
 import {
 	ensureDirectoryDoesNotExist,
 	getPackageManagerFlag,
 } from "../../shared/utils/index.js";
+import { getCreateNextAppCommand } from "../shared/generators/package-installations/package-runner/package-runner.js";
 import { customizeNextApp } from "./customize-next-app.js";
 
 export const createNextApp = async (config: ProjectConfig): Promise<void> => {
